@@ -1,4 +1,4 @@
-# claude-attribution-guard
+# agent-attribution-blocker
 
 Two [pre-commit](https://pre-commit.com) hooks that block commits and pushes
 carrying Claude Code's attribution — `Co-Authored-By: Claude ...` /
@@ -18,7 +18,7 @@ repo's `.pre-commit-config.yaml`:
 
 ```yaml
 repos:
-  - repo: https://github.com/ca1ebd/claude-attribution-guard
+  - repo: https://github.com/ca1ebd/agent-attribution-blocker
     rev: v1.0.0
     hooks:
       - id: no-claude-attribution-commit-msg
