@@ -25,7 +25,7 @@ check_range() {
   local range=("$@")
   while read -r sha; do
     [ -z "$sha" ] && continue
-    if git log -1 --format='%B' "$sha" | grep -qE "$CLAUDE_ATTRIBUTION_PATTERN"; then
+    if git log -1 --format='%B' "$sha" | grep -qiE "$CLAUDE_ATTRIBUTION_PATTERN"; then
       bad_commits="$bad_commits$sha $(git log -1 --format='%s' "$sha")"$'\n'
     fi
   done < <(git log "${range[@]}" --format='%H')
