@@ -1,0 +1,20 @@
+# This repo uses its own hooks, from the working tree, rather than pinning
+# itself by tag. Dogfooding: a change that breaks a hook shows up on the very
+# next commit here, instead of only in whichever repo upgrades the tag first.
+# Mirrors .pre-commit-hooks.yaml — keep the two in step.
+repos:
+  - repo: local
+    hooks:
+      - id: no-claude-attribution-commit-msg
+        name: Block Claude Code attribution in commit messages
+        entry: hooks/commit-msg
+        language: script
+        stages: [commit-msg]
+
+      - id: no-claude-attribution-pre-push
+        name: Block pushing commits with Claude Code attribution
+        entry: hooks/pre-push
+        language: script
+        stages: [pre-push]
+        always_run: true
+        pass_filenames: false
