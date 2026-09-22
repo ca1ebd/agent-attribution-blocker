@@ -9,7 +9,7 @@ source "$dir/lib.sh"
 
 msg_file="$1"
 
-if grep -qE "$CLAUDE_ATTRIBUTION_PATTERN" "$msg_file"; then
+if grep -qiE "$CLAUDE_ATTRIBUTION_PATTERN" "$msg_file"; then
   echo "commit-msg: blocked — commit message contains Claude Code attribution." >&2
   echo "Remove the Co-Authored-By / Claude-Session / \"Generated with Claude Code\" line(s) and try again." >&2
   exit 1
