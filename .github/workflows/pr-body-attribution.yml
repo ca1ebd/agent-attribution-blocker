@@ -1,0 +1,26 @@
+name: Block Claude attribution in PR body
+
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+
+permissions:
+  contents: read
+
+jobs:
+  check-pr-body:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check PR description for Claude Code attribution
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          # shellcheck source=hooks/lib.sh
+          source hooks/lib.sh
+          if printf '%s' "$PR_BODY" | grep -qiE "$CLAUDE_ATTRIBUTION_PATTERN"; then
+            echo "PR description contains Claude Code attribution (Co-Authored-By / Claude-Session / \"Generated with Claude Code\" / 🤖)." >&2
+            echo "Remove it from the PR description and try again." >&2
+            exit 1
+          fi
