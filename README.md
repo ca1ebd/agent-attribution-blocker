@@ -58,15 +58,6 @@ trailer, closed **"not planned."** That's what this tool is actually for —
 enforcement that doesn't depend on Claude Code's internal behavior at all,
 since it just checks the literal commit text after the fact.
 
-## PR descriptions
-
-The hooks only see commit messages — they can't stop a PR description on
-GitHub from carrying a "Generated with Claude Code" footer. This repo's own
-PRs are checked by `.github/workflows/pr-body-attribution.yml`, which fails
-the PR if its description matches `CLAUDE_ATTRIBUTION_PATTERN`. Copy that
-workflow file into a consuming repo's `.github/workflows/` to get the same
-check there.
-
 ## Without pre-commit
 
 The two scripts under `hooks/` are plain POSIX-ish shell and work as raw git
